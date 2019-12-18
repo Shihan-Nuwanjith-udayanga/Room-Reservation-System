@@ -1,0 +1,77 @@
+DROP DATABASE hotel_reservation;
+
+CREATE DATABASE hotel_reservation;
+
+USE hotel_reservation;
+
+CREATE TABLE customer(
+cid INT NOT NULL ,
+customer_name VARCHAR(40),
+customer_address VARCHAR(20),
+customer_contact INT,
+CONSTRAINT PRIMARY KEY(cid)
+);
+
+
+CREATE TABLE reservation(
+cid INT NOT NULL,
+reservation_id INT NOT NULL AUTO_INCREMENT,
+arrival_date DATE,
+departure_date DATE,
+no_of_customer INT,
+room_qty INT,
+CONSTRAINT PRIMARY KEY(reservation_id),
+CONSTRAINT FOREIGN KEY(cid) REFERENCES customer (cid)
+ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+CREATE TABLE meal(
+mid INT NOT NULL AUTO_INCREMENT,
+reservation_id INT NOT NULL,
+meal_type VARCHAR(40),
+meal_qty INT,
+CONSTRAINT PRIMARY KEY(mid),
+CONSTRAINT FOREIGN KEY(reservation_id) REFERENCES reservation(reservation_id)
+ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+
+CREATE TABLE room(
+rid INT NOT NULL AUTO_INCREMENT,
+reservation_id INT,
+room_type VARCHAR(40),
+CONSTRAINT PRIMARY KEY(rid),
+CONSTRAINT FOREIGN KEY(reservation_id) REFERENCES reservation(reservation_id)
+ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+
+INSERT INTO meal VALUES(0,1,"Break First",4);
+INSERT INTO meal VALUES(2,2,"Break First",4);
+
+INSERT INTO customer VALUES(0,"shihan","Galle",0773381841);
+INSERT INTO customer VALUES(1,"sasanka","Galle",0715251487);
+
+INSERT INTO room VALUES(001,null,"Normal");
+INSERT INTO room VALUES(002,null,"Luxary");
+INSERT INTO room VALUES(003,null,"Luxary");
+INSERT INTO room VALUES(004,null,"Normal");
+INSERT INTO room VALUES(005,null,"Luxary");
+INSERT INTO room VALUES(006,null,"Luxary");
+INSERT INTO room VALUES(007,null,"Normal");
+INSERT INTO room VALUES(008,null,"Normal");
+INSERT INTO room VALUES(009,null,"Luxary");
+INSERT INTO room VALUES(010,null,"Normal");
+INSERT INTO room VALUES(011,null,"Normal");
+INSERT INTO room VALUES(012,null,"Luxary");
+INSERT INTO room VALUES(013,null,"Luxary");
+INSERT INTO room VALUES(014,null,"Luxary");
+INSERT INTO room VALUES(015,null,"Super Luxary");
+INSERT INTO room VALUES(016,null,"Super Luxary");
+INSERT INTO room VALUES(017,null,"Super Luxary");
+INSERT INTO room VALUES(018,null,"Super Luxary");
+INSERT INTO room VALUES(019,null,"Luxary");
+INSERT INTO room VALUES(020,null,"Luxary");
